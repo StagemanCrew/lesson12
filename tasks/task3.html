@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-3</title>
+</head>
+<body>
+    <h1>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.</h1>
+
+    <script>
+
+        //1. Вводимо даннi
+        function swap(array, i, j) {
+            let temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+        let arrayNum = [];
+        while (arrayNum.length < 30) {
+            let num = Math.floor(Math.random() * 61)-30;
+            if (!arrayNum.includes(num))
+                arrayNum.push(num);
+        }
+        document.write(`<h2>Befor: ${arrayNum}</h2>`)
+
+        //2.Знаходимо результат
+        function insertSort(arrayNum) {
+            let swaps = 0;
+            for (let k = 1; k < arrayNum.length; k++) {
+                const currentEl = arrayNum[k];
+                let i = k - 1;
+                while (i >= 0 && arrayNum[i] > currentEl) {
+                    arrayNum[i + 1] = arrayNum[i];
+                    i = i - 1;
+                    swaps++;
+                    document.write(`<h2>${swaps} включення: ${arrayNum}.</h2>`)
+                }
+                arrayNum[i + 1] = currentEl;
+            }
+            return swaps;
+        }
+
+// Вызов функции сортировки і отримання кількості обмінів
+let swaps = insertSort(arrayNum);
+
+        // Виводимо результат
+        document.write(`<h3>After: Було ${swaps} включень. ${arrayNum}.</h3>`)
+
+    </script>
+</body>
+</html>

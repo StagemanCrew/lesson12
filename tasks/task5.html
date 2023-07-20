@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-5</title>
+</head>
+<body>
+    <h1>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 9 символів і під яким індексом.</h1>
+
+    <script>
+
+        // 1. Вводимо дані
+        let names = ['John', 'Paul', 'Olga', 'Andrew', 'Abrams', 'Abba', 'Oleksandr', 'Tina', 'Olha', 'Jack', 'Peter'];
+        document.write(`<h2>${names.join(', ')}.</h2>`);
+
+        // 2. Сортуємо масив
+        names.sort();
+        document.write(`<h2>After sort: ${names.join(', ')}.</h2>`);
+
+        // 3. Функція для бінарного пошуку
+        function binarySearch(names, searchLength) {
+            let start = 0;
+            let end = names.length - 1;
+            while (start <= end) {
+                const middle = Math.floor((start + end) / 2);
+                if (names[middle].length === searchLength) return middle;
+                if (names[middle].length < searchLength) start = middle + 1;
+                else end = middle - 1;
+            }
+            return -1;
+        }
+
+        // 4. Виконуємо бінарний пошук імені з 9 символами
+        let searchNameLength = 9;
+        let nameLetter = binarySearch(names, searchNameLength);
+
+        // 5. Виводимо результат
+        if (nameLetter !== -1) {
+            document.write(`<h2>Ім'я з ${searchNameLength} символів є. <br>Знаходиться під індексом ${nameLetter}!</br>`);
+        } else {
+            document.write(`<h2>Ім'я з ${searchNameLength} символів відсутнє в масиві.</h2>`);
+        }
+
+    </script>
+</body>
+</html>

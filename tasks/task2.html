@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>task-2</title>
+</head>
+<body>
+    <h1>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням.</h1>
+
+    <script>
+
+        //1. Вводимо даннi
+        function swap(array, i, j) {
+            let temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+
+        let arrayNum = []
+        for (let i = 0; i < 30; i++) {
+            let num = Math.floor(Math.random() * 200) + 1;
+            if (!arrayNum.includes(num)) {
+                arrayNum.push(num);
+            }
+        }
+        document.write(`<h2>Befor: ${arrayNum}</h2>`)
+
+        //2. Знаходимо результат
+        let leftIndex = 0
+        let rightIndex = arrayNum.length - 1
+        let swaps = 0;
+
+        while (leftIndex < rightIndex) {
+            for (let i = leftIndex; i < rightIndex; i++) {
+                if (arrayNum[i] > arrayNum[i + 1])
+                swap(arrayNum, i, i + 1)
+                swaps++
+            }
+            rightIndex--
+            document.write(`<h2>Було ${swaps} обмінів. ${arrayNum}.</h2>`)
+
+            for (let i = rightIndex; i > leftIndex; i--) {
+                if (arrayNum[i] < arrayNum[i - 1])
+                swap(arrayNum, i, i - 1)
+                swaps++
+            }
+            leftIndex++
+            document.write(`<h2>Було ${swaps} обмінів. ${arrayNum}.</h2>`)
+        }
+
+        //3. Виводимо результат
+        document.write(`<h3>Всього було ${swaps} обмінів. ${arrayNum}.</h3>`)
+
+    </script>
+</body>
+</html>
